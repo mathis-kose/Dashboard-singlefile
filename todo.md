@@ -65,9 +65,10 @@ Dieses Dokument dient als detaillierter, schrittweiser Plan für die Entwicklung
     - [x] Temporäre Test-Kachel in das Grid einfügen, um das Styling zu verifizieren.
 - [x] **Interaktives Kachel-Feedback**
     - [x] Einen `:active`-State für die `.tile`-Klasse definieren, der den "Gedrückt"-Effekt (inset shadow) erzeugt.
-- [ ] **Testing**
-    - [ ] E2E-Test erweitern: Verifiziert, dass die Test-Kachel die korrekten Schatten für das jeweilige Theme hat.
-    - [ ] E2E-Test schreiben: Simuliert ein Klicken/Halten auf der Kachel und prüft, ob sich der `box-shadow` auf den "inset"-Wert ändert.
+- [x] **Testing**
+    - [x] E2E-Test erweitern: Verifiziert, dass die Test-Kachel die korrekten Schatten für das jeweilige Theme hat.
+    - [x] E2E-Test schreiben: Simuliert ein Klicken/Halten auf der Kachel und prüft, ob sich der `box-shadow` auf den "inset"-Wert ändert.
+    - [x] E2E-Test für responsives Grid-Layout hinzugefügt
 
 ---
 
@@ -98,20 +99,21 @@ Dieses Dokument dient als detaillierter, schrittweiser Plan für die Entwicklung
 
 *Ziel: Dem Benutzer ermöglichen, Kacheln dynamisch hinzuzufügen und zu entfernen.*
 
-- [ ] **Kachel hinzufügen ("Shop")**
-    - [ ] HTML/CSS für ein Modal erstellen, das verfügbare Kacheln anzeigt (idealerweise auch via `<template>`).
-    - [ ] JavaScript-Logik zum Öffnen/Schließen des Modals implementieren.
-    - [ ] Logik implementieren, die bei Klick auf eine Kachel-Art im Modal:
-        - [ ] Das entsprechende `<template>` klont.
-        - [ ] Das geklonte Element zum Grid hinzufügt.
-        - [ ] Die zugehörige Widget-Klasse instanziiert.
-- [ ] **Kachel entfernen**
-    - [ ] Event-Listener für Rechtsklick auf Kacheln hinzufügen, der ein Kontextmenü öffnet.
-    - [ ] Kontextmenü mit "Entfernen"-Option implementieren.
-    - [ ] Logik für den "Entfernen"-Button, die das DOM-Element der Kachel entfernt und ggf. die zugehörige JS-Instanz/Intervalle bereinigt.
-- [ ] **Testing**
-    - [ ] E2E-Test: Öffnet das Modal, fügt eine Uhr hinzu, verifiziert, dass sie im Grid erscheint.
-    - [ ] E2E-Test: Fügt eine Kachel hinzu, macht einen Rechtsklick, klickt auf "Entfernen", verifiziert, dass die Kachel verschwindet.
+- [x] **Kachel hinzufügen ("Shop")**
+    - [x] HTML/CSS für ein Modal erstellen, das verfügbare Kacheln anzeigt (idealerweise auch via `<template>`).
+    - [x] JavaScript-Logik zum Öffnen/Schließen des Modals implementieren.
+    - [x] Logik implementieren, die bei Klick auf eine Kachel-Art im Modal:
+        - [x] Das entsprechende `<template>` klont.
+        - [x] Das geklonte Element zum Grid hinzufügt.
+        - [x] Die zugehörige Widget-Klasse instanziiert.
+- [x] **Kachel entfernen**
+    - [x] Event-Listener für Rechtsklick auf Kacheln hinzufügen, der ein Kontextmenü öffnet.
+    - [x] Kontextmenü mit "Entfernen"-Option implementieren.
+    - [x] Logik für den "Entfernen"-Button, die das DOM-Element der Kachel entfernt und ggf. die zugehörige JS-Instanz/Intervalle bereinigt.
+- [x] **Testing**
+    - [x] E2E-Test: Öffnet das Modal, fügt eine Uhr hinzu, verifiziert, dass sie im Grid erscheint.
+    - [x] E2E-Test: Fügt eine Kachel hinzu, macht einen Rechtsklick, klickt auf "Entfernen", verifiziert, dass die Kachel verschwindet.
+    - [x] E2E-Test: Verifiziert, dass mehrere Kacheln hinzugefügt und entfernt werden können
 
 ---
 
