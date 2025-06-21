@@ -55,6 +55,168 @@
             box-shadow: inset 7px 7px 15px var(--shadow-dark), inset -7px -7px 15px var(--shadow-light);
             font-size: 1.18rem;
         }
+
+        /* Timeline Styles */
+        .timeline-tile {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .alarm-controls {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .alarm-time {
+            padding: 0.25rem;
+            border-radius: 5px;
+            border: 1px solid var(--shadow-dark);
+            background: var(--background-color);
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        .alarm-time.invalid {
+            border-color: #ff4444;
+        }
+
+        .timeline-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--shadow-light);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color-start), var(--accent-color-end));
+            transition: width 0.3s ease;
+        }
+
+        /* Alarm Styles */
+        body.alarm-active {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0% { background-color: var(--accent-color-start); }
+            50% { background-color: var(--background-color); }
+            100% { background-color: var(--accent-color-start); }
+        }
+
+        /* Prompt Library Styles */
+        .prompt-library-tile {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .category-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .category-item {
+            border: 1px solid var(--shadow-dark);
+            border-radius: 10px;
+            padding: 1rem;
+            background: var(--background-color);
+        }
+
+        .prompt-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .prompt-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 5px;
+            background: var(--shadow-light);
+        }
+
+        .remove-btn, .replace-placeholder-btn {
+            background: none;
+            border: none;
+            color: #ff4444;
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+
+        .placeholder-form {
+            margin: 1rem 0;
+        }
+
+        .placeholder-form input {
+            display: block;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            border-radius: 5px;
+            border: 1px solid var(--shadow-dark);
+            background: var(--background-color);
+            color: var(--text-color);
+        }
+
+        /* Theme Switcher Styles */
+        .theme-switcher-tile {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .theme-options {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .theme-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .theme-btn[data-theme="light"] {
+            background: var(--shadow-light);
+            color: var(--text-color);
+        }
+
+        .theme-btn[data-theme="dark"] {
+            background: var(--shadow-dark);
+            color: var(--text-color);
+        }
+
+        .theme-btn:hover {
+            opacity: 0.8;
+        }
+
+        .customize-btn {
+            padding: 0.5rem;
+            border: none;
+            border-radius: 5px;
+            background: var(--accent-color-start);
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .customize-btn:hover {
+            opacity: 0.8;
+        }
     </style>
     <style>
         .clock-tile {
@@ -176,6 +338,83 @@
         </div>
     </template>
 
+    <!-- Timeline Tile Template -->
+    <template id="template-timeline">
+        <div class="tile timeline-tile">
+            <div class="timeline-header">
+                <h3>Tagesleiste</h3>
+                <div class="alarm-controls">
+                    <input type="text" class="alarm-time" placeholder="HH:MM" pattern="[0-9]{2}:[0-9]{2}">
+                    <button class="set-alarm-btn">Alarm setzen</button>
+                </div>
+            </div>
+            <div class="timeline-bar">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Prompt Library Tile Template -->
+    <template id="template-prompt-library">
+        <div class="tile prompt-library-tile">
+            <h3>Prompt-Bibliothek</h3>
+            <button class="add-prompt-btn">Prompt hinzufügen</button>
+            <div class="category-list"></div>
+        </div>
+    </template>
+
+    <!-- Theme Switcher Tile Template -->
+    <template id="template-theme-switcher">
+        <div class="tile theme-switcher-tile">
+            <h3>Design-Umschalter</h3>
+            <div class="theme-options">
+                <button class="theme-btn" data-theme="light">Light Theme</button>
+                <button class="theme-btn" data-theme="dark">Dark Theme</button>
+            </div>
+            <button class="customize-btn">Design anpassen</button>
+        </div>
+    </template>
+
+    <!-- Prompt Editor Modal Template -->
+    <template id="template-prompt-editor-modal">
+        <div id="prompt-editor-modal" class="modal">
+            <div class="modal-content">
+                <h2>Prompt hinzufügen</h2>
+                <div class="form-group">
+                    <label for="prompt">Prompt-Text:</label>
+                    <input type="text" name="prompt" id="prompt" placeholder="Dein Prompt hier...">
+                </div>
+                <div class="form-group">
+                    <label for="category">Kategorie:</label>
+                    <select name="category" id="category">
+                        <option value="Allgemein">Allgemein</option>
+                        <option value="Arbeit">Arbeit</option>
+                        <option value="Persönlich">Persönlich</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button class="save-btn">Speichern</button>
+                    <button class="close-modal">Abbrechen</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Placeholder Replacement Modal Template -->
+    <template id="template-placeholder-replacement-modal">
+        <div id="placeholder-replacement-modal" class="modal">
+            <div class="modal-content">
+                <h2>Platzhalter ersetzen</h2>
+                <div class="original-prompt"></div>
+                <div class="placeholder-form"></div>
+                <div class="modal-actions">
+                    <button class="replace-btn">Ersetzen</button>
+                    <button class="close-modal">Abbrechen</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
     <template id="template-clock">
         <div class="tile clock-tile">
             <div class="clock-time">00:00:00</div>
@@ -220,8 +459,420 @@
             }
         }
 
+        // TimelineWidget Class
+        class TimelineWidget {
+            constructor(element) {
+                this.element = element;
+                this.bar = this.element.querySelector('.timeline-bar');
+                this.progressBar = this.element.querySelector('.progress-bar');
+                this.alarmTimeInput = this.element.querySelector('.alarm-time');
+                this.alarmButton = this.element.querySelector('.set-alarm-btn');
+                this.updateInterval = null;
+                this.alarmTime = null;
+                this.initialize();
+            }
+
+            initialize() {
+                this.updateTimeline();
+                this.updateInterval = setInterval(() => this.updateTimeline(), 1000);
+
+                // Alarm-Setup
+                this.alarmButton.addEventListener('click', () => {
+                    const time = this.alarmTimeInput.value;
+                    if (this.validateTime(time)) {
+                        this.alarmTime = this.parseTime(time);
+                        this.alarmTimeInput.classList.remove('invalid');
+                    } else {
+                        this.alarmTimeInput.classList.add('invalid');
+                    }
+                });
+            }
+
+            updateTimeline() {
+                const now = new Date();
+                const startOfDay = new Date(now);
+                startOfDay.setHours(0, 0, 0, 0);
+                const endOfDay = new Date(now);
+                endOfDay.setHours(23, 59, 59, 999);
+
+                const currentTime = now.getTime();
+                const dayStart = startOfDay.getTime();
+                const dayEnd = endOfDay.getTime();
+
+                const progress = (currentTime - dayStart) / (dayEnd - dayStart) * 100;
+                this.progressBar.style.width = `${progress}%`;
+
+                // Check for alarm
+                if (this.alarmTime && this.isAlarmTime(now)) {
+                    document.body.classList.add('alarm-active');
+                } else {
+                    document.body.classList.remove('alarm-active');
+                }
+            }
+
+            validateTime(time) {
+                const [hours, minutes] = time.split(':');
+                return hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59;
+            }
+
+            parseTime(time) {
+                const [hours, minutes] = time.split(':').map(Number);
+                const now = new Date();
+                return new Date(now.getFullYear(), now.getMonth(), now.getDate(), hours, minutes);
+            }
+
+            isAlarmTime(currentTime) {
+                return currentTime.getHours() === this.alarmTime.getHours() &&
+                       currentTime.getMinutes() === this.alarmTime.getMinutes();
+            }
+        }
+
+        // ThemeSwitcherWidget Class
+        class ThemeSwitcherWidget {
+            constructor(element) {
+                this.element = element;
+                this.themeOptions = this.element.querySelector('.theme-options');
+                this.customizationModal = document.getElementById('theme-customization-modal');
+                this.initialize();
+            }
+
+            initialize() {
+                // Event-Listener für Theme-Umschalter
+                this.themeOptions.querySelectorAll('button').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const theme = button.dataset.theme;
+                        this.switchTheme(theme);
+                    });
+                });
+
+                // Event-Listener für Customization
+                this.element.querySelector('.customize-btn').addEventListener('click', () => {
+                    this.openCustomizationModal();
+                });
+
+                // Event-Listener für Customization-Speichern
+                this.customizationModal.querySelector('.save-btn').addEventListener('click', () => {
+                    this.saveCustomization();
+                });
+
+                // Event-Listener für Customization-Modal-Schließen
+                this.customizationModal.querySelector('.close-modal').addEventListener('click', () => {
+                    this.customizationModal.remove();
+                });
+
+                // Lade gespeicherte Farben
+                this.loadCustomColors();
+            }
+
+            switchTheme(theme) {
+                const body = document.body;
+                if (theme === 'dark') {
+                    body.setAttribute('data-theme', 'dark');
+                } else {
+                    body.removeAttribute('data-theme');
+                }
+            }
+
+            openCustomizationModal() {
+                // Zeige das Modal
+                this.customizationModal.style.display = 'block';
+            }
+
+            saveCustomization() {
+                const newColors = {
+                    accentColorStart: this.customizationModal.querySelector('input[name="accent-color-start"]').value,
+                    accentColorEnd: this.customizationModal.querySelector('input[name="accent-color-end"]').value
+                };
+
+                // Speichere die Farben in localStorage
+                localStorage.setItem('customColors', JSON.stringify(newColors));
+
+                // Aktualisiere die CSS-Variablen
+                document.documentElement.style.setProperty('--accent-color-start', newColors.accentColorStart);
+                document.documentElement.style.setProperty('--accent-color-end', newColors.accentColorEnd);
+
+                // Schließe das Modal
+                this.customizationModal.remove();
+            }
+
+            loadCustomColors() {
+                const savedColors = JSON.parse(localStorage.getItem('customColors') || '{}');
+                if (savedColors.accentColorStart) {
+                    document.documentElement.style.setProperty('--accent-color-start', savedColors.accentColorStart);
+                }
+                if (savedColors.accentColorEnd) {
+                    document.documentElement.style.setProperty('--accent-color-end', savedColors.accentColorEnd);
+                }
+            }
+        }
+
+        // PromptLibraryWidget Class
+        class PromptLibraryWidget {
+            constructor(element) {
+                this.element = element;
+                this.categoryList = this.element.querySelector('.category-list');
+                this.promptEditorModal = document.getElementById('prompt-editor-modal');
+                this.placeholderReplacementModal = document.getElementById('placeholder-replacement-modal');
+                this.prompts = this.loadPrompts();
+                this.initialize();
+            }
+
+            initialize() {
+                // Initialisiere Standard-Kategorien
+                const defaultCategories = ['Allgemein', 'Arbeit', 'Persönlich'];
+                defaultCategories.forEach(category => {
+                    this.addCategory(category);
+                });
+
+                // Event-Listener für "Prompt hinzufügen"
+                this.element.querySelector('.add-prompt-btn').addEventListener('click', () => {
+                    this.openPromptEditor();
+                });
+
+                // Event-Listener für "Speichern" im Editor
+                this.promptEditorModal.querySelector('.save-btn').addEventListener('click', () => {
+                    this.savePrompt();
+                });
+
+                // Event-Listener für "Schließen" im Editor
+                this.promptEditorModal.querySelector('.close-modal').addEventListener('click', () => {
+                    this.promptEditorModal.remove();
+                });
+
+                // Event-Listener für "Schließen" in Placeholder-Modal
+                this.placeholderReplacementModal.querySelector('.close-modal').addEventListener('click', () => {
+                    this.placeholderReplacementModal.remove();
+                });
+
+                // Event-Listener für "Ersetzen" in Placeholder-Modal
+                this.placeholderReplacementModal.querySelector('.replace-btn').addEventListener('click', () => {
+                    this.replacePlaceholders();
+                });
+            }
+
+            loadPrompts() {
+                // Lade gespeicherte Prompts aus localStorage oder returne Standard-Prompts
+                return JSON.parse(localStorage.getItem('prompts') || JSON.stringify({
+                    Allgemein: [],
+                    Arbeit: [],
+                    Persönlich: []
+                }));
+            }
+
+            savePrompts() {
+                localStorage.setItem('prompts', JSON.stringify(this.prompts));
+            }
+
+            addCategory(category) {
+                const categoryItem = document.createElement('div');
+                categoryItem.className = 'category-item';
+                categoryItem.innerHTML = `
+                    <h4>${category}</h4>
+                    <div class="prompt-list"></div>
+                `;
+                this.categoryList.appendChild(categoryItem);
+
+                // Füge gespeicherte Prompts hinzu
+                this.prompts[category]?.forEach(prompt => {
+                    this.addPrompt(category, prompt.text, prompt.id);
+                });
+            }
+
+            addPrompt(category, text, id = Date.now()) {
+                const promptItem = document.createElement('div');
+                promptItem.className = 'prompt-item';
+                promptItem.innerHTML = `
+                    <span>${text}</span>
+                    <button class="remove-btn">Entfernen</button>
+                    <button class="replace-placeholder-btn">Ersetzen</button>
+                `;
+
+                // Event-Listener für "Entfernen"
+                promptItem.querySelector('.remove-btn').addEventListener('click', () => {
+                    this.removePrompt(category, id);
+                });
+
+                // Event-Listener für "Ersetzen"
+                promptItem.querySelector('.replace-placeholder-btn').addEventListener('click', () => {
+                    this.openPlaceholderReplacement(text, id);
+                });
+
+                this.categoryList
+                    .querySelector(`h4:contains('${category}')`)
+                    .closest('.category-item')
+                    .querySelector('.prompt-list')
+                    .appendChild(promptItem);
+
+                // Speichere den neuen Prompt
+                if (!this.prompts[category]) {
+                    this.prompts[category] = [];
+                }
+                this.prompts[category].push({ id, text });
+                this.savePrompts();
+            }
+
+            removePrompt(category, id) {
+                const promptItem = this.categoryList
+                    .querySelector(`h4:contains('${category}')`)
+                    .closest('.category-item')
+                    .querySelector(`.prompt-item[data-id="${id}"]`);
+                if (promptItem) {
+                    promptItem.remove();
+                }
+
+                // Entferne den Prompt aus dem State
+                this.prompts[category] = this.prompts[category].filter(p => p.id !== id);
+                this.savePrompts();
+            }
+
+            openPromptEditor() {
+                this.promptEditorModal.style.display = 'block';
+            }
+
+            savePrompt() {
+                const prompt = this.promptEditorModal.querySelector('input[name="prompt"]').value;
+                const category = this.promptEditorModal.querySelector('select[name="category"]').value;
+                
+                if (prompt && category) {
+                    this.addPrompt(category, prompt);
+                    this.promptEditorModal.remove();
+                }
+            }
+
+            openPlaceholderReplacement(text, id) {
+                this.placeholderReplacementModal.style.display = 'block';
+                this.placeholderReplacementModal.querySelector('.original-prompt').textContent = text;
+                this.placeholderReplacementModal.dataset.promptId = id;
+            }
+
+            replacePlaceholders() {
+                const promptId = this.placeholderReplacementModal.dataset.promptId;
+                const category = Object.entries(this.prompts).find(([_, prompts]) =>
+                    prompts.some(p => p.id === parseInt(promptId))
+                )?.[0];
+
+                if (category) {
+                    const prompt = this.prompts[category].find(p => p.id === parseInt(promptId));
+                    if (prompt) {
+                        const replacements = {};
+                        this.placeholderReplacementModal.querySelectorAll('input').forEach(input => {
+                            replacements[input.name] = input.value;
+                        });
+
+                        let newText = prompt.text;
+                        Object.entries(replacements).forEach(([key, value]) => {
+                            newText = newText.replace(new RegExp(`{{${key}}}`, 'g'), value);
+                        });
+
+                        // Ersetze den Prompt im DOM
+                        const promptItem = this.categoryList
+                            .querySelector(`h4:contains('${category}')`)
+                            .closest('.category-item')
+                            .querySelector(`.prompt-item[data-id="${promptId}"]`);
+                        if (promptItem) {
+                            promptItem.querySelector('span').textContent = newText;
+                        }
+
+                        // Aktualisiere den Prompt im State
+                        prompt.text = newText;
+                        this.savePrompts();
+                    }
+                }
+
+                this.placeholderReplacementModal.remove();
+            }
+        }
+        }
+
+        // Persistence Manager Class
+        class PersistenceManager {
+            constructor() {
+                this.dashboardState = this.loadState();
+                this.saveState();
+            }
+
+            loadState() {
+                return JSON.parse(localStorage.getItem('dashboardState') || JSON.stringify({
+                    layout: [],
+                    theme: {
+                        isDark: false,
+                        accentColors: {
+                            start: getComputedStyle(document.documentElement).getPropertyValue('--accent-color-start'),
+                            end: getComputedStyle(document.documentElement).getPropertyValue('--accent-color-end')
+                        }
+                    }
+                }));
+            }
+
+            saveState() {
+                const state = {
+                    layout: Array.from(document.getElementById('dashboard-grid').children).map(tile => ({
+                        id: tile.id,
+                        type: tile.dataset.type
+                    })),
+                    theme: {
+                        isDark: document.body.hasAttribute('data-theme'),
+                        accentColors: {
+                            start: getComputedStyle(document.documentElement).getPropertyValue('--accent-color-start'),
+                            end: getComputedStyle(document.documentElement).getPropertyValue('--accent-color-end')
+                        }
+                    }
+                };
+                localStorage.setItem('dashboardState', JSON.stringify(state));
+            }
+
+            restoreLayout() {
+                const grid = document.getElementById('dashboard-grid');
+                grid.innerHTML = '';
+
+                this.dashboardState.layout.forEach(tile => {
+                    const template = document.getElementById(`template-${tile.type}`);
+                    const clone = template.content.cloneNode(true);
+                    clone.querySelector('.tile').id = tile.id;
+                    grid.appendChild(clone);
+
+                    // Initialisiere die entsprechende Widget-Klasse
+                    switch (tile.type) {
+                        case 'clock':
+                            new ClockWidget(clone.querySelector('.clock-tile'));
+                            break;
+                        case 'timeline':
+                            new TimelineWidget(clone.querySelector('.timeline-tile'));
+                            break;
+                        case 'prompt-library':
+                            new PromptLibraryWidget(clone.querySelector('.prompt-library-tile'));
+                            break;
+                        case 'theme-switcher':
+                            new ThemeSwitcherWidget(clone.querySelector('.theme-switcher-tile'));
+                            break;
+                    }
+                });
+
+                // Wiederherstellung des Themes
+                if (this.dashboardState.theme.isDark) {
+                    document.body.setAttribute('data-theme', 'dark');
+                }
+
+                // Wiederherstellung der Farben
+                const { start, end } = this.dashboardState.theme.accentColors;
+                document.documentElement.style.setProperty('--accent-color-start', start);
+                document.documentElement.style.setProperty('--accent-color-end', end);
+            }
+        }
+
+        // Event-Listener für Dashboard-Änderungen
+        document.addEventListener('tileAdded', () => {
+            persistenceManager.saveState();
+        });
+
+        document.addEventListener('tileRemoved', () => {
+            persistenceManager.saveState();
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
             console.log("App-Skript geladen.");
+            const persistenceManager = new PersistenceManager();
+            persistenceManager.restoreLayout();
 
             const themeToggle = document.getElementById('theme-toggle');
             const addTileBtn = document.getElementById('add-tile');

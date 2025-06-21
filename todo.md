@@ -121,22 +121,22 @@ Dieses Dokument dient als detaillierter, schrittweiser Plan für die Entwicklung
 
 *Ziel: Die Kernfunktionen der App durch komplexe, interaktive Kacheln implementieren.*
 
-- [ ] **Kachel: Tagesleiste**
-    - [ ] `<template id="template-timeline">` erstellen.
-    - [ ] `TimelineWidget`-Klasse in JS erstellen.
-    - [ ] Logik zur Berechnung und Visualisierung des Tagesablaufs (Start, Ende, Pausen, Termine).
-    - [ ] Logik für den dynamischen Fortschrittsbalken implementieren.
-    - [ ] Alarm-Funktion (Bildschirm-Blinken via CSS-Klasse am `<body>`) implementieren.
-- [ ] **Kachel: Prompt-Bibliothek**
-    - [ ] `<template id="template-prompt-library">` für die Kachel erstellen.
-    - [ ] `<template>` für das Editor/Bibliothek-Modal erstellen.
-    - [ ] JavaScript-Logik zur Verwaltung der Prompts (Hinzufügen, Bearbeiten, Löschen, Kategorisieren).
-    - [ ] Reine JavaScript-Funktion zur Platzhalter-Ersetzung (`{{platzhalter}}`).
-- [ ] **Kachel: Design-Umschalter**
-    - [ ] `button#theme-toggle` in eine eigene Kachel umwandeln.
-    - [ ] `<template>` und Logik für diese Kachel erstellen.
-- [ ] **Testing**
-    - [ ] E2E-Tests für die Kernfunktionalität jeder neuen Kachel schreiben.
+- [x] **Kachel: Tagesleiste**
+    - [x] `<template id="template-timeline">` erstellt.
+    - [x] `TimelineWidget`-Klasse in JS erstellt.
+    - [x] Logik zur Berechnung und Visualisierung des Tagesablaufs (Start, Ende, Pausen, Termine) implementiert.
+    - [x] Logik für den dynamischen Fortschrittsbalken implementiert.
+    - [x] Alarm-Funktion (Bildschirm-Blinken via CSS-Klasse am `<body>`) implementiert.
+- [x] **Kachel: Prompt-Bibliothek**
+    - [x] `<template id="template-prompt-library">` für die Kachel erstellt.
+    - [x] `<template>` für das Editor/Bibliothek-Modal erstellt.
+    - [x] JavaScript-Logik zur Verwaltung der Prompts (Hinzufügen, Bearbeiten, Löschen, Kategorisieren).
+    - [x] Reine JavaScript-Funktion zur Platzhalter-Ersetzung (`{{platzhalter}}`).
+- [x] **Kachel: Design-Umschalter**
+    - [x] `button#theme-toggle` in eine eigene Kachel umgewandelt.
+    - [x] `<template>` und Logik für diese Kachel erstellt.
+- [x] **Testing**
+    - [x] E2E-Tests für die Kernfunktionalität jeder neuen Kachel geschrieben.
 
 ---
 
@@ -144,19 +144,19 @@ Dieses Dokument dient als detaillierter, schrittweiser Plan für die Entwicklung
 
 *Ziel: Den Zustand der App speichern, damit er Sitzungen überdauert.*
 
-- [ ] **Lokale Persistenz (`localStorage`)**
-    - [ ] Eine globale `state`-Variable in JS definieren, die Layout und Kachel-Daten enthält.
-    - [ ] Eine `saveStateToLocal()`-Funktion schreiben, die den `state` als JSON in `localStorage` speichert.
-    - [ ] Eine `loadStateFromLocal()`-Funktion schreiben, die beim Start den Zustand lädt und das Dashboard wiederherstellt.
-    - [ ] `saveStateToLocal()` nach jeder relevanten Änderung aufrufen (Kachel hinzufügen/entfernen/verschieben).
+- [x] **Lokale Persistenz (`localStorage`)**
+    - [x] Eine globale `state`-Variable in JS definiert, die Layout und Kachel-Daten enthält.
+    - [x] Eine `saveStateToLocal()`-Funktion geschrieben, die den `state` als JSON in `localStorage` speichert.
+    - [x] Eine `loadStateFromLocal()`-Funktion geschrieben, die beim Start den Zustand lädt und das Dashboard wiederherstellt.
+    - [x] `saveStateToLocal()` nach jeder relevanten Änderung aufgerufen (Kachel hinzufügen/entfernen/verschieben).
 - [ ] **Cloud-Persistenz (Firebase)**
     - [ ] Firebase SDKs (App, Auth, Firestore) via CDN im HTML einbinden.
     - [ ] Firebase-App mit den Konfigurationsdaten initialisieren.
     - [ ] UI und Logik für Google-Authentifizierung implementieren (Login/Logout-Button).
     - [ ] Funktionen `saveStateToFirestore()` und `loadStateFromFirestore()` implementieren.
     - [ ] Logik zur Synchronisation entwickeln (z.B. bei Login aus Cloud laden, bei Änderungen in Cloud speichern).
-- [ ] **Testing**
-    - [ ] E2E-Test: Ändert das Layout, lädt die Seite neu und verifiziert, dass das Layout aus `localStorage` wiederhergestellt wird.
+- [x] **Testing**
+    - [x] E2E-Test: Ändert das Layout, lädt die Seite neu und verifiziert, dass das Layout aus `localStorage` wiederhergestellt wird.
     - [ ] E2E-Test (erfordert ggf. Mocking oder Test-Account): Loggt sich ein, verifiziert, dass Daten geladen werden.
 
 ---
