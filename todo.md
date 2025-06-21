@@ -21,13 +21,13 @@ Dieses Dokument dient als detaillierter, schrittweiser Plan für die Entwicklung
 *Ziel: Ein stabiles Fundament für die Entwicklung schaffen.*
 
 - [ ] **Versionskontrolle**
-    - [ ] Git-Repository initialisieren.
-    - [ ] `README.md` mit Projektbeschreibung, Zielen und Setup-Anweisungen erstellen.
-    - [ ] Diese `todo.md`-Datei zum Projekt hinzufügen und pflegen.
-    - [ ] `.gitignore`-Datei erstellen (insb. für lokale Konfigurationen oder Test-Artefakte).
+    - [x] Git-Repository initialisieren.
+    - [x] `README.md` mit Projektbeschreibung, Zielen und Setup-Anweisungen erstellen.
+    - [x] Diese `todo.md`-Datei zum Projekt hinzufügen und pflegen.
+    - [x] `.gitignore`-Datei erstellen (insb. für lokale Konfigurationen oder Test-Artefakte).
 - [ ] **Test-Infrastruktur**
-    - [ ] Entscheidung für ein E2E-Test-Framework (Cypress oder Playwright).
-    - [ ] Grundlegendes Setup für das gewählte Framework installieren und konfigurieren.
+    - [x] Entscheidung für ein E2E-Test-Framework (Cypress oder Playwright).
+    - [x] Grundlegendes Setup für das gewählte Framework installieren und konfigurieren.
     - [ ] Ersten "Smoke Test" schreiben, der prüft, ob die `index.html` ohne Fehler lädt.
 
 ---
@@ -37,16 +37,16 @@ Dieses Dokument dient als detaillierter, schrittweiser Plan für die Entwicklung
 *Ziel: Eine leere, aber funktionierende Seite mit umschaltbarem Light/Dark-Theme.*
 
 - [ ] **HTML-Grundgerüst**
-    - [ ] `index.html`-Datei mit der korrekten Single-File-Struktur erstellen (Head, Body, Style, Script-Tags).
-    - [ ] `main#dashboard-grid`-Container im Body platzieren.
+    - [x] `index.html`-Datei mit der korrekten Single-File-Struktur erstellen (Head, Body, Style, Script-Tags).
+    - [x] `main#dashboard-grid`-Container im Body platzieren.
 - [ ] **CSS-Theming-System**
-    - [ ] CSS-Variablen für das Light-Theme im `:root`-Selektor definieren (Farben, Schatten).
-    - [ ] CSS-Variablen für das Dark-Theme im `[data-theme="dark"]`-Selektor definieren.
-    - [ ] Globale `body`-Stile anwenden, die diese Variablen nutzen (Hintergrund, Textfarbe).
-    - [ ] Sanfte Übergänge für Farbwechsel hinzufügen (`transition`).
+    - [x] CSS-Variablen für das Light-Theme im `:root`-Selektor definieren (Farben, Schatten).
+    - [x] CSS-Variablen für das Dark-Theme im `[data-theme="dark"]`-Selektor definieren.
+    - [x] Globale `body`-Stile anwenden, die diese Variablen nutzen (Hintergrund, Textfarbe).
+    - [x] Sanfte Übergänge für Farbwechsel hinzufügen (`transition`).
 - [ ] **Interaktiver Theme-Umschalter**
-    - [ ] `button#theme-toggle` im HTML hinzufügen.
-    - [ ] JavaScript-Logik im `DOMContentLoaded`-Listener implementieren, die das `data-theme`-Attribut auf dem `<body>` umschaltet.
+    - [x] `button#theme-toggle` im HTML hinzufügen.
+    - [x] JavaScript-Logik im `DOMContentLoaded`-Listener implementieren, die das `data-theme`-Attribut auf dem `<body>` umschaltet.
 - [ ] **Testing**
     - [ ] E2E-Test schreiben: Klickt auf den Theme-Umschalter und verifiziert, dass sich die `background-color` des `body` korrekt ändert.
 

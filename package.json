@@ -1,0 +1,15 @@
+{
+  "name": "dashboard-singlefile",
+  "version": "1.0.0",
+  "description": "Eine modulare, personalisierbare Produktivitäts-Web-App, konzipiert als autarke Single-File-Anwendung (`index.html`).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.53.1"
+  }
+}
