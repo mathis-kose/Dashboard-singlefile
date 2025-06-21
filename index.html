@@ -29,14 +29,116 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
+
+        #dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            grid-auto-rows: 120px;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .tile {
+            padding: 15px;
+            border-radius: 20px;
+            background: var(--background-color);
+            color: var(--text-color);
+            box-shadow: 7px 7px 15px var(--shadow-dark), -7px -7px 15px var(--shadow-light);
+            transition: all 0.2s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+        }
+
+        .tile:active {
+            box-shadow: inset 7px 7px 15px var(--shadow-dark), inset -7px -7px 15px var(--shadow-light);
+            font-size: 1.18rem;
+        }
     </style>
+    <style>
+        .clock-tile {
+ flex-direction: column;
+        }
+        .clock-time {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-color);
+            letter-spacing: 2px;
+        }</style>
 </head>
 <body data-theme="light">
-    <main id="dashboard-grid"></main>
     <button id="theme-toggle">Theme wechseln</button>
+    <template id="template-clock">
+        <div class="tile clock-tile">
+            <div class="clock-time">00:00:00</div>
+        </div>
+    </template>
 
- <script type="module">
- console.log("App-Skript geladen.");
+    <main id="dashboard-grid"></main>
+
+    
+
+    <script type="module">
+        // Phase 3: ClockWidget Class
+        class ClockWidget {
+            constructor(element) {
+                this.element = element;
+                this.timeDisplay = this.element.querySelector('.clock-time');
+                this.intervalId = null; // To store the interval ID
+            }
+
+            updateTime() {
+                const now = new Date();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+                this.timeDisplay.textContent = `${hours}:${minutes}:${seconds}`;
+
+                // Calculate color based on seconds (simple interpolation example)
+                // Interpolate between black and red over 60 seconds
+                const startColor = { r: 0, g: 0, b: 0 }; // Black
+                const endColor = { r: 255, g: 0, b: 0 }; // Red
+                const factor = seconds / 59; // 0 to 1 over 59 seconds
+
+                const r = Math.floor(startColor.r + factor * (endColor.r - startColor.r));
+                const g = Math.floor(startColor.g + factor * (endColor.g - startColor.g));
+                const b = Math.floor(startColor.b + factor * (endColor.b - startColor.b));
+                this.timeDisplay.style.setProperty('--clock-digit-color', `rgb(${r}, ${g}, ${b})`);
+            }
+
+            start() {
+                this.updateTime(); // Initial call
+                this.intervalId = setInterval(() => this.updateTime(), 1000);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("App-Skript geladen.");
+
+            const themeToggle = document.getElementById('theme-toggle');
+            const dashboardGrid = document.getElementById('dashboard-grid');
+            const templateClock = document.getElementById('template-clock');
+            const body = document.body;
+
+            themeToggle.addEventListener('click', () => {
+                if (body.getAttribute('data-theme') === 'light') {
+
+                    body.setAttribute('data-theme', 'dark');
+                } else {
+                    body.setAttribute('data-theme', 'light');
+                }
+            });
+
+            console.log("App-Skript geladen.");
+
+            // Phase 3: Instanziieren und Anzeigen der Uhr-Kachel
+            const clockElement = templateClock.content.cloneNode(true).querySelector('.clock-tile');
+            dashboardGrid.appendChild(clockElement);
+            const clock = new ClockWidget(clockElement);
+            clock.start();
+
+        });
  </script>
 </body>
 </html>

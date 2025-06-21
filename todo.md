@@ -28,7 +28,7 @@ Dieses Dokument dient als detaillierter, schrittweiser Plan für die Entwicklung
 - [ ] **Test-Infrastruktur**
     - [x] Entscheidung für ein E2E-Test-Framework (Cypress oder Playwright).
     - [x] Grundlegendes Setup für das gewählte Framework installieren und konfigurieren.
-    - [ ] Ersten "Smoke Test" schreiben, der prüft, ob die `index.html` ohne Fehler lädt.
+    - [x] Ersten "Smoke Test" schreiben, der prüft, ob die `index.html` ohne Fehler lädt.
 
 ---
 
@@ -58,11 +58,13 @@ Dieses Dokument dient als detaillierter, schrittweiser Plan für die Entwicklung
 
 - [ ] **Layout-System**
     - [ ] `main#dashboard-grid` als responsives CSS Grid stylen (`grid-template-columns`, `gap`, etc.).
-- [ ] **Neumorphisches Kachel-Design**
-    - [ ] Eine generische `.tile`-Klasse erstellen, die den Neumorphismus-Effekt mittels `box-shadow` und den CSS-Variablen umsetzt.
-    - [ ] Temporäre Test-Kachel in das Grid einfügen, um das Styling zu verifizieren.
-- [ ] **Interaktives Kachel-Feedback**
-    - [ ] Einen `:active`-State für die `.tile`-Klasse definieren, der den "Gedrückt"-Effekt (inset shadow) erzeugt.
+- [x] **Layout-System**
+    - [x] `main#dashboard-grid` als responsives CSS Grid stylen (`grid-template-columns`, `gap`, etc.).
+- [x] **Neumorphisches Kachel-Design**
+    - [x] Eine generische `.tile`-Klasse erstellen, die den Neumorphismus-Effekt mittels `box-shadow` und den CSS-Variablen umsetzt.
+    - [x] Temporäre Test-Kachel in das Grid einfügen, um das Styling zu verifizieren.
+- [x] **Interaktives Kachel-Feedback**
+    - [x] Einen `:active`-State für die `.tile`-Klasse definieren, der den "Gedrückt"-Effekt (inset shadow) erzeugt.
 - [ ] **Testing**
     - [ ] E2E-Test erweitern: Verifiziert, dass die Test-Kachel die korrekten Schatten für das jeweilige Theme hat.
     - [ ] E2E-Test schreiben: Simuliert ein Klicken/Halten auf der Kachel und prüft, ob sich der `box-shadow` auf den "inset"-Wert ändert.
@@ -73,20 +75,20 @@ Dieses Dokument dient als detaillierter, schrittweiser Plan für die Entwicklung
 
 *Ziel: Die erste dynamische, funktionale Kachel zum Dashboard hinzufügen.*
 
-- [ ] **Struktur & Styling**
-    - [ ] Temporäre Test-Kachel aus dem HTML entfernen.
-    - [ ] `<template id="template-clock">` für die Uhr-Kachel erstellen.
-    - [ ] Spezifisches CSS für die Uhr-Kachel und die Zeitanzeige (`.clock-time`) hinzufügen.
-- [ ] **Logik-Kapselung**
-    - [ ] Die `ClockWidget`-Klasse in JavaScript definieren.
-        - [ ] `constructor` zum Binden an ein DOM-Element.
-        - [ ] `updateTime()`-Methode zur Formatierung und Anzeige der aktuellen Zeit.
-        - [ ] `start()`-Methode, die `setInterval` zur sekündlichen Aktualisierung nutzt.
-- [ ] **Integration**
-    - [ ] Im Hauptskript die Uhr-Vorlage klonen, ins DOM einfügen und eine `ClockWidget`-Instanz dafür erstellen.
-    - [ ] Die `start()`-Methode der Instanz aufrufen.
-- [ ] **Funktionserweiterung (aus Spezifikation)**
-    - [ ] Uhr-Logik erweitern, um die Ziffernfarbe basierend auf der Sekunde zu ändern (via CSS-Variable `--clock-digit-color`).
+- [x] **Struktur & Styling**
+    - [x] Temporäre Test-Kachel aus dem HTML entfernen.
+    - [x] `<template id="template-clock">` für die Uhr-Kachel erstellen.
+    - [x] Spezifisches CSS für die Uhr-Kachel und die Zeitanzeige (`.clock-time`) hinzufügen.
+- [x] **Logik-Kapselung**
+    - [x] Die `ClockWidget`-Klasse in JavaScript definieren.
+        - [x] `constructor` zum Binden an ein DOM-Element.
+        - [x] `updateTime()`-Methode zur Formatierung und Anzeige der aktuellen Zeit.
+        - [x] `start()`-Methode, die `setInterval` zur sekündlichen Aktualisierung nutzt.
+- [x] **Integration**
+    - [x] Im Hauptskript die Uhr-Vorlage klonen, ins DOM einfügen und eine `ClockWidget`-Instanz dafür erstellen.
+    - [x] Die `start()`-Methode der Instanz aufrufen.
+- [x] **Funktionserweiterung (aus Spezifikation)**
+    - [x] Uhr-Logik erweitern, um die Ziffernfarbe basierend auf der Sekunde zu ändern (via CSS-Variable `--clock-digit-color`).
 - [ ] **Testing**
     - [ ] E2E-Test schreiben: Verifiziert, dass die Uhr-Kachel angezeigt wird und sich die angezeigte Zeit im Sekundentakt ändert.
 
